@@ -1,0 +1,54 @@
+from Shop import BikeRental
+from Customers import Customer
+import datetime
+
+def main():
+    Bikeshop = BikeRental(50)
+    customer1 = Customer()
+    while True:
+        print("""
+               WELCOME TO OUR BIKE RENTAL SHOP
+        1. To see the total amount of bikes available.
+        2. To lend a bike on an hourly basis. You will be charged $5 per hour.
+        3. To lend a bike on a daily basis. You will be charged $20 per day.
+        4. To lend a bike on a weekly basis. You will be charged $60 per week.
+        5. To return a bike.
+        6. Exit.
+        """)
+        
+        choice = input("Enter choice: ")
+        choice = int(choice)
+        if choice <= 0:
+            print("Please enter a valid choice.")
+        
+        if choice == 1:
+            Bikeshop.availableBikes()
+        
+        elif choice == 2:
+            customer1.issue_time = Bikeshop.hourlyBasis(customer1.requestBike())
+            customer1.rental_choice = 1
+
+        elif choice == 3:
+            customer1.issue_time = Bikeshop.dailyBasis(customer1.requestBike())
+            customer1.rental_choice = 2
+
+        elif choice == 4:
+            customer1.issue_time = Bikeshop.weeklyBasis(customer1.requestBike())
+            customer1.rental_choice = 3
+
+        elif choice == 5:
+            customer1.bill = Bikeshop.bikeReturn(customer1.returnBike())
+
+            customer1.issue_time=0
+            customer1.rental_choice=0
+            customer1.bike = 0   
+        elif choice == 6:
+            exit()    
+            break
+        else:
+            print("Please select a positive number between 1 and 6.")        
+    print("Thank you for using our services. Please visit again.")
+    print("Have a great day ahead!")
+
+
+main()   
